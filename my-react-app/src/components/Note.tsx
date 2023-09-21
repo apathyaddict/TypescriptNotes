@@ -5,7 +5,7 @@ import CardContent from "@mui/material/CardContent";
 import { CardMedia } from "@mui/material";
 
 interface NoteProps {
-  note: { id: number; title: string; text: string };
+  note: { id: number; title: string; text: string; date: string };
 }
 
 const Note = ({ note }: NoteProps) => {
@@ -24,7 +24,10 @@ const Note = ({ note }: NoteProps) => {
         alt="Paella dish"
       />
       <CardContent>
-        <Typography sx={{ fontSize: 18 }} color="text.secondary" gutterBottom>
+        <Typography sx={{ fontSize: 13 }} color="text.secondary" gutterBottom>
+          {note.date}
+        </Typography>
+        <Typography variant="h5" component="div">
           {note.title}
         </Typography>
         <Typography variant="body2">{note.text}</Typography>

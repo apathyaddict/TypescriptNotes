@@ -3,7 +3,7 @@ import Grid from "@mui/material/Grid";
 import Note from "./Note";
 
 interface Props {
-  notes: { id: number; title: string; text: string }[];
+  notes: { id: number; title: string; text: string; date: string }[];
 }
 
 const NotesList = ({ notes }: Props) => {

@@ -1,4 +1,5 @@
 import "./App.css";
+import fecha from "fecha";
 import TextField from "@mui/material/TextField";
 import { Container } from "@mui/material";
 import Box from "@mui/material/Box";
@@ -11,12 +12,16 @@ interface Note {
   id: number;
   title: string;
   text: string;
+  date: string;
 }
 
 function App() {
   const [inputValue, setInputValue] = useState<string>("");
   const [title, setTitle] = useState<string>("");
   const [notes, setNotes] = useState<[]>([]);
+
+  const now = new Date();
+  const formattedDate = fecha.format(now, "MMM D, hh:mm A");
 
   function addNote(e) {
     e.preventDefault();
@@ -25,6 +30,7 @@ function App() {
       id: notes.length + 1,
       title: title,
       text: inputValue,
+      date: formattedDate,
     };
 
     setNotes([...notes, newNote]);
