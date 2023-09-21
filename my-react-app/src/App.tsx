@@ -10,10 +10,12 @@ import NotesList from "./components/NotesList";
 interface Note {
   id: number;
   title: string;
+  text: string;
 }
 
 function App() {
   const [inputValue, setInputValue] = useState<string>("");
+  const [title, setTitle] = useState<string>("");
   const [notes, setNotes] = useState<[]>([]);
 
   function addNote(e) {
@@ -21,16 +23,18 @@ function App() {
 
     const newNote: Note = {
       id: notes.length + 1,
-      title: inputValue,
+      title: title,
+      text: inputValue,
     };
 
-    setNotes([newNote, ...notes]);
+    setNotes([...notes, newNote]);
     setInputValue("");
+    setTitle("");
   }
 
   return (
     <>
-      <Container maxWidth="sm">
+      <Container fixed maxWidth="sm">
         <Typography variant="h3" gutterBottom>
           {" "}
           Reminders
@@ -42,6 +46,15 @@ function App() {
             flexDirection="column"
             alignItems="start"
           >
+            <TextField
+              id="outlined-password-input"
+              label="Note Title"
+              type="text"
+              sx={{ width: "100%" }}
+              margin="normal"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+            />
             <TextField
               label="Forget me not"
               multiline
@@ -58,6 +71,7 @@ function App() {
               mt: 1,
               bgcolor: "background.paper",
               borderRadius: 1,
+              marginBottom: 4,
             }}
           >
             <Button
@@ -70,7 +84,7 @@ function App() {
           </Box>
         </form>
       </Container>
-      <Box padding={15}>
+      <Box paddingLeft={15} paddingRight={15}>
         <NotesList notes={notes} />
       </Box>
     </>
