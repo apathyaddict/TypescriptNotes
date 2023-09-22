@@ -19,16 +19,26 @@ function App() {
   const [inputValue, setInputValue] = useState<string>("");
   const [title, setTitle] = useState<string>("");
   const [notes, setNotes] = useState<Note[]>([]);
+  const [favNotes, setFavNotes] = useState<Note[]>([]);
+  const [noteError, setNoteError] = useState<boolean>(false);
 
   const now = new Date();
   const formattedDate = fecha.format(now, "MMM D, hh:mm A");
 
   function addNote(e) {
     e.preventDefault();
+    setNoteError(false);
+
+    const noteTitle = title.trim() === "" ? "Untitled" : title;
+
+    if (inputValue == "") {
+      setNoteError(true);
+    }
 
     const newNote: Note = {
+      //FIXME: id
       id: notes.length + 1,
-      title: title,
+      title: noteTitle,
       text: inputValue,
       date: formattedDate,
     };
@@ -36,6 +46,7 @@ function App() {
     setNotes([...notes, newNote]);
     setInputValue("");
     setTitle("");
+    setNoteError(false);
   }
 
   const deleteNote = (noteId: number) => {
@@ -43,11 +54,19 @@ function App() {
     setNotes(updatedNotes);
   };
 
+  const favoriteNote = (noteId: number) => {
+    const noteToFavorite = notes.find((note) => note.id === noteId);
+    if (noteToFavorite) {
+      if (!favNotes.some((favNote) => favNote.id === noteId)) {
+        setFavNotes([...favNotes, noteToFavorite]);
+      }
+    }
+  };
+
   return (
     <>
-      <Container fixed maxWidth="sm">
+      <Container fixed maxWidth="sm" sx={{ padding: 3 }}>
         <Typography variant="h3" gutterBottom>
-          {" "}
           Reminders
         </Typography>
         <form onSubmit={addNote}>
@@ -67,12 +86,17 @@ function App() {
               onChange={(e) => setTitle(e.target.value)}
             />
             <TextField
-              label="Forget me not"
+              label="Note"
               multiline
               rows={4}
               sx={{ width: "100%" }}
               value={inputValue}
-              onChange={(e) => setInputValue(e.target.value)}
+              required
+              error={noteError}
+              helperText={noteError ? "Please enter a note." : ""}
+              onChange={(e) => {
+                setInputValue(e.target.value);
+              }}
             />
           </Box>
           <Box
@@ -96,7 +120,17 @@ function App() {
         </form>
       </Container>
       <Box paddingLeft={15} paddingRight={15}>
-        <NotesList notes={notes} deleteNote={deleteNote} />
+        <NotesList
+          notes={notes}
+          deleteNote={deleteNote}
+          favoriteNote={favoriteNote}
+        />
+        {/* Favorite NotesList
+        <NotesList
+          notes={favNotes}
+          deleteNote={deleteNote}
+          favoriteNote={favoriteNote}
+        /> */}
       </Box>
     </>
   );

@@ -1,18 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
 import Card from "@mui/material/Card";
 import Typography from "@mui/material/Typography";
 import CardContent from "@mui/material/CardContent";
 import { CardActions, CardMedia, IconButton } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 
 interface NoteProps {
   note: { id: number; title: string; text: string; date: string };
   deleteNote: (noteId: number) => void;
+  favoriteNote: (noteId: number) => void;
 }
 
-const Note = ({ note, deleteNote }: NoteProps) => {
+const Note = ({ note, deleteNote, favoriteNote }: NoteProps) => {
+  const [isFavorited, setIsFavorited] = useState<boolean>(false);
+
   const handleDelete = () => {
     deleteNote(note.id);
+  };
+
+  const handleFavorite = () => {
+    favoriteNote(note.id);
+    setIsFavorited((prevIsFavorited) => !prevIsFavorited);
   };
 
   return (
@@ -35,15 +44,18 @@ const Note = ({ note, deleteNote }: NoteProps) => {
         <Typography sx={{ fontSize: 13 }} color="text.secondary" gutterBottom>
           {note.date}
         </Typography>
-        <Typography variant="h5" component="div">
+        <Typography variant="h6" component="div">
           {note.title}
         </Typography>
         <Typography variant="body2">{note.text}</Typography>
       </CardContent>
       <div style={{ marginLeft: "auto" }}>
         <CardActions disableSpacing>
-          <IconButton aria-label="add to favorites">
-            <DeleteIcon onClick={handleDelete} />
+          <IconButton aria-label="add to favorites" onClick={handleFavorite}>
+            <FavoriteIcon className={isFavorited ? "favorited" : ""} />
+          </IconButton>
+          <IconButton aria-label="delete" onClick={handleDelete}>
+            <DeleteIcon />
           </IconButton>
         </CardActions>
       </div>
