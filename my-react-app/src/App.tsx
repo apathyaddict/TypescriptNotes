@@ -18,7 +18,7 @@ interface Note {
 function App() {
   const [inputValue, setInputValue] = useState<string>("");
   const [title, setTitle] = useState<string>("");
-  const [notes, setNotes] = useState<[]>([]);
+  const [notes, setNotes] = useState<Note[]>([]);
 
   const now = new Date();
   const formattedDate = fecha.format(now, "MMM D, hh:mm A");
@@ -37,6 +37,11 @@ function App() {
     setInputValue("");
     setTitle("");
   }
+
+  const deleteNote = (noteId: number) => {
+    const updatedNotes = notes.filter((note) => note.id !== noteId);
+    setNotes(updatedNotes);
+  };
 
   return (
     <>
@@ -91,7 +96,7 @@ function App() {
         </form>
       </Container>
       <Box paddingLeft={15} paddingRight={15}>
-        <NotesList notes={notes} />
+        <NotesList notes={notes} deleteNote={deleteNote} />
       </Box>
     </>
   );

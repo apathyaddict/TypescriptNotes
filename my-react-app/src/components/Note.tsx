@@ -2,18 +2,26 @@ import React from "react";
 import Card from "@mui/material/Card";
 import Typography from "@mui/material/Typography";
 import CardContent from "@mui/material/CardContent";
-import { CardMedia } from "@mui/material";
+import { CardActions, CardMedia, IconButton } from "@mui/material";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 interface NoteProps {
   note: { id: number; title: string; text: string; date: string };
+  deleteNote: (noteId: number) => void;
 }
 
-const Note = ({ note }: NoteProps) => {
+const Note = ({ note, deleteNote }: NoteProps) => {
+  const handleDelete = () => {
+    deleteNote(note.id);
+  };
+
   return (
     <Card
       sx={{
         minWidth: 275,
         maxWidth: 275,
+        display: "flex",
+        flexDirection: "column",
       }}
       key={note.id}
     >
@@ -32,6 +40,13 @@ const Note = ({ note }: NoteProps) => {
         </Typography>
         <Typography variant="body2">{note.text}</Typography>
       </CardContent>
+      <div style={{ marginLeft: "auto" }}>
+        <CardActions disableSpacing>
+          <IconButton aria-label="add to favorites">
+            <DeleteIcon onClick={handleDelete} />
+          </IconButton>
+        </CardActions>
+      </div>
     </Card>
   );
 };
