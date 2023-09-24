@@ -5,14 +5,27 @@ import CardContent from "@mui/material/CardContent";
 import { CardActions, CardMedia, IconButton } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import FavoriteIcon from "@mui/icons-material/Favorite";
+import EditIcon from "@mui/icons-material/Edit";
 
 interface NoteProps {
   note: { id: number; title: string; text: string; date: string };
   deleteNote: (noteId: number) => void;
   favoriteNote: (noteId: number) => void;
+  open: boolean;
+  handleClose: () => void;
+  handleOpen: () => void;
+  selected: { id: number; title: string; text: string; date: string };
 }
 
-const Note = ({ note, deleteNote, favoriteNote }: NoteProps) => {
+const Note = ({
+  note,
+  deleteNote,
+  favoriteNote,
+  open,
+  handleClose,
+  handleOpen,
+  selected,
+}: NoteProps) => {
   const [isFavorited, setIsFavorited] = useState<boolean>(false);
 
   const handleDelete = () => {
@@ -22,6 +35,10 @@ const Note = ({ note, deleteNote, favoriteNote }: NoteProps) => {
   const handleFavorite = () => {
     favoriteNote(note.id);
     setIsFavorited((prevIsFavorited) => !prevIsFavorited);
+  };
+
+  const handleEdit = () => {
+    handleOpen();
   };
 
   return (
@@ -51,6 +68,9 @@ const Note = ({ note, deleteNote, favoriteNote }: NoteProps) => {
       </CardContent>
       <div style={{ marginLeft: "auto" }}>
         <CardActions disableSpacing>
+          <IconButton aria-label="edit" onClick={handleEdit}>
+            <EditIcon />
+          </IconButton>
           <IconButton aria-label="add to favorites" onClick={handleFavorite}>
             <FavoriteIcon className={isFavorited ? "favorited" : ""} />
           </IconButton>

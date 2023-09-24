@@ -7,6 +7,8 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import { useState } from "react";
 import NotesList from "./components/NotesList";
+import EditModal from "./components/EditModal";
+import Form from "./components/Form";
 
 interface Note {
   id: number;
@@ -21,6 +23,10 @@ function App() {
   const [notes, setNotes] = useState<Note[]>([]);
   const [favNotes, setFavNotes] = useState<Note[]>([]);
   const [noteError, setNoteError] = useState<boolean>(false);
+  const [open, setOpen] = useState<boolean>(false);
+
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   const now = new Date();
   const formattedDate = fecha.format(now, "MMM D, hh:mm A");
@@ -69,61 +75,23 @@ function App() {
         <Typography variant="h3" gutterBottom>
           Reminders
         </Typography>
-        <form onSubmit={addNote}>
-          <Box
-            border="primary"
-            display="flex"
-            flexDirection="column"
-            alignItems="start"
-          >
-            <TextField
-              id="outlined-password-input"
-              label="Note Title"
-              type="text"
-              sx={{ width: "100%" }}
-              margin="normal"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-            />
-            <TextField
-              label="Note"
-              multiline
-              rows={4}
-              sx={{ width: "100%" }}
-              value={inputValue}
-              required
-              error={noteError}
-              helperText={noteError ? "Please enter a note." : ""}
-              onChange={(e) => {
-                setInputValue(e.target.value);
-              }}
-            />
-          </Box>
-          <Box
-            sx={{
-              display: "flex",
-              flexDirection: "row-reverse",
-              mt: 1,
-              bgcolor: "background.paper",
-              borderRadius: 1,
-              marginBottom: 4,
-            }}
-          >
-            <Button
-              variant="contained"
-              startIcon={<span className="material-icons">add</span>}
-              type="submit"
-            >
-              Note
-            </Button>
-          </Box>
-        </form>
+        <Form
+          {...{
+            addNote,
+            title,
+            setTitle,
+            inputValue,
+            setInputValue,
+            noteError,
+          }}
+        />
       </Container>
       <Box paddingLeft={15} paddingRight={15}>
         <NotesList
           notes={notes}
           deleteNote={deleteNote}
           favoriteNote={favoriteNote}
+          handleOpen={handleOpen}
         />
         {/* Favorite NotesList
         <NotesList
@@ -132,6 +100,11 @@ function App() {
           favoriteNote={favoriteNote}
         /> */}
       </Box>
+      <EditModal
+        handleOpen={handleOpen}
+        handleClose={handleClose}
+        open={open}
+      />
     </>
   );
 }
