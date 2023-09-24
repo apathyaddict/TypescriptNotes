@@ -8,6 +8,7 @@ import { useState } from "react";
 import NotesList from "./components/NotesList";
 import EditModal from "./components/EditModal";
 import Form from "./components/Form";
+import ButtonAppBar from "./components/ButtonAppBar";
 
 interface Note {
   id: string;
@@ -50,6 +51,7 @@ function App() {
 
   return (
     <>
+      <ButtonAppBar />
       <Container fixed maxWidth="sm" sx={{ padding: 3 }}>
         <Typography variant="h3" gutterBottom>
           Reminders
