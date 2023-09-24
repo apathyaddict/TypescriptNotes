@@ -1,4 +1,4 @@
-import { Box, Button, TextField } from "@mui/material";
+import { Box, Button, CardMedia, TextField } from "@mui/material";
 import React, { useState } from "react";
 import fecha from "fecha";
 import SaveIcon from "@mui/icons-material/Save";
@@ -12,7 +12,7 @@ interface FormProps {
     text: string;
     date: string;
   };
-  setOpen: (open: boolean) => void;
+  //   setOpen: (open: boolean) => void;
   handleClose: () => void;
 }
 
@@ -23,7 +23,7 @@ interface Note {
   date: string;
 }
 
-const Form = ({ addNote, selected, setOpen, handleClose }: FormProps) => {
+const Form = ({ addNote, selected, handleClose }: FormProps) => {
   const [inputValue, setInputValue] = useState<string>(
     selected ? selected.text : ""
   );
@@ -66,6 +66,14 @@ const Form = ({ addNote, selected, setOpen, handleClose }: FormProps) => {
 
   return (
     <form onSubmit={handleSubmit}>
+      {selected && (
+        <CardMedia
+          component="img"
+          height="94"
+          image="https://images.pexels.com/photos/317356/pexels-photo-317356.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+          alt="Paella dish"
+        />
+      )}
       <Box
         border="primary"
         display="flex"

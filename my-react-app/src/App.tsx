@@ -54,20 +54,21 @@ function App() {
         <Typography variant="h3" gutterBottom>
           Reminders
         </Typography>
-        <Form
-          {...{
-            addNote,
-            setOpen,
-            handleClose,
-          }}
-        />
+        <Box>
+          <Form
+            {...{
+              addNote,
+              setOpen,
+              handleClose,
+            }}
+          />
+        </Box>
       </Container>
       <Box paddingLeft={15} paddingRight={15}>
         <NotesList
           notes={notes}
           deleteNote={deleteNote}
           favoriteNote={favoriteNote}
-          handleOpen={handleOpen}
         />
         {/* Favorite NotesList
         <NotesList
@@ -76,11 +77,6 @@ function App() {
           favoriteNote={favoriteNote}
         /> */}
       </Box>
-      <EditModal
-        handleOpen={handleOpen}
-        handleClose={handleClose}
-        open={open}
-      />
     </>
   );
 }

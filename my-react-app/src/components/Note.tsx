@@ -11,21 +11,10 @@ interface NoteProps {
   note: { id: string; title: string; text: string; date: string };
   deleteNote: (noteId: string) => void;
   favoriteNote: (noteId: string) => void;
-  open: boolean;
-  handleClose: () => void;
   handleOpen: () => void;
-  selected: { id: string; title: string; text: string; date: string };
 }
 
-const Note = ({
-  note,
-  deleteNote,
-  favoriteNote,
-  open,
-  handleClose,
-  handleOpen,
-  selected,
-}: NoteProps) => {
+const Note = ({ note, deleteNote, favoriteNote, handleOpen }: NoteProps) => {
   const [isFavorited, setIsFavorited] = useState<boolean>(false);
 
   const handleDelete = () => {
@@ -51,7 +40,7 @@ const Note = ({
         component="img"
         height="94"
         image="https://images.pexels.com/photos/317356/pexels-photo-317356.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
-        alt="Paella dish"
+        alt="notes image"
       />
       <CardContent>
         <Typography sx={{ fontSize: 13 }} color="text.secondary" gutterBottom>
