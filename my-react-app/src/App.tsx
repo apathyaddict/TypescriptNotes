@@ -1,5 +1,4 @@
 import "./App.css";
-import fecha from "fecha";
 import TextField from "@mui/material/TextField";
 import { Container } from "@mui/material";
 import Box from "@mui/material/Box";
@@ -11,56 +10,36 @@ import EditModal from "./components/EditModal";
 import Form from "./components/Form";
 
 interface Note {
-  id: number;
+  id: string;
   title: string;
   text: string;
   date: string;
 }
 
 function App() {
-  const [inputValue, setInputValue] = useState<string>("");
-  const [title, setTitle] = useState<string>("");
   const [notes, setNotes] = useState<Note[]>([]);
   const [favNotes, setFavNotes] = useState<Note[]>([]);
-  const [noteError, setNoteError] = useState<boolean>(false);
+
   const [open, setOpen] = useState<boolean>(false);
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const now = new Date();
-  const formattedDate = fecha.format(now, "MMM D, hh:mm A");
-
-  function addNote(e) {
-    e.preventDefault();
-    setNoteError(false);
-
-    const noteTitle = title.trim() === "" ? "Untitled" : title;
-
-    if (inputValue == "") {
-      setNoteError(true);
-    }
-
-    const newNote: Note = {
-      //FIXME: id
-      id: notes.length + 1,
-      title: noteTitle,
-      text: inputValue,
-      date: formattedDate,
-    };
-
+  const addNote = (newNote: {
+    id: string;
+    title: string;
+    text: string;
+    date: string;
+  }) => {
     setNotes([...notes, newNote]);
-    setInputValue("");
-    setTitle("");
-    setNoteError(false);
-  }
+  };
 
-  const deleteNote = (noteId: number) => {
+  const deleteNote = (noteId: string) => {
     const updatedNotes = notes.filter((note) => note.id !== noteId);
     setNotes(updatedNotes);
   };
 
-  const favoriteNote = (noteId: number) => {
+  const favoriteNote = (noteId: string) => {
     const noteToFavorite = notes.find((note) => note.id === noteId);
     if (noteToFavorite) {
       if (!favNotes.some((favNote) => favNote.id === noteId)) {
@@ -78,11 +57,8 @@ function App() {
         <Form
           {...{
             addNote,
-            title,
-            setTitle,
-            inputValue,
-            setInputValue,
-            noteError,
+            setOpen,
+            handleClose,
           }}
         />
       </Container>

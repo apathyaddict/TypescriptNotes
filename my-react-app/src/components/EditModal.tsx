@@ -17,7 +17,7 @@ const style = {
 
 interface Props {
   open: boolean;
-  selected: { id: number; title: string; text: string; date: string };
+  selected: { id: string; title: string; text: string; date: string };
   handleClose: () => void;
   handleOpen: () => void;
 }
@@ -32,7 +32,7 @@ const EditModal = ({ open, selected, handleClose, handleOpen }: Props) => {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <Form selected={selected} />
+          <Form {...{ selected, handleClose }} />
         </Box>
       </Modal>
     </div>

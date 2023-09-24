@@ -8,13 +8,13 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import EditIcon from "@mui/icons-material/Edit";
 
 interface NoteProps {
-  note: { id: number; title: string; text: string; date: string };
-  deleteNote: (noteId: number) => void;
-  favoriteNote: (noteId: number) => void;
+  note: { id: string; title: string; text: string; date: string };
+  deleteNote: (noteId: string) => void;
+  favoriteNote: (noteId: string) => void;
   open: boolean;
   handleClose: () => void;
   handleOpen: () => void;
-  selected: { id: number; title: string; text: string; date: string };
+  selected: { id: string; title: string; text: string; date: string };
 }
 
 const Note = ({
@@ -35,10 +35,6 @@ const Note = ({
   const handleFavorite = () => {
     favoriteNote(note.id);
     setIsFavorited((prevIsFavorited) => !prevIsFavorited);
-  };
-
-  const handleEdit = () => {
-    handleOpen();
   };
 
   return (
@@ -68,7 +64,7 @@ const Note = ({
       </CardContent>
       <div style={{ marginLeft: "auto" }}>
         <CardActions disableSpacing>
-          <IconButton aria-label="edit" onClick={handleEdit}>
+          <IconButton aria-label="edit" onClick={() => handleOpen(note)}>
             <EditIcon />
           </IconButton>
           <IconButton aria-label="add to favorites" onClick={handleFavorite}>

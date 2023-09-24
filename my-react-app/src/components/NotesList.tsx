@@ -4,26 +4,30 @@ import Note from "./Note";
 import EditModal from "./EditModal";
 
 interface Note {
-  id: number;
+  id: string;
   title: string;
   text: string;
   date: string;
 }
 
 interface Props {
-  notes: { id: number; title: string; text: string; date: string }[];
-  deleteNote: (noteId: number) => void; //This part represents the return type of the function. void is a type in TypeScript that means the function doesn't return any value.
-  favoriteNote: (noteId: number) => void;
+  notes: { id: string; title: string; text: string; date: string }[];
+  deleteNote: (noteId: string) => void; //This part represents the return type of the function. void is a type in TypeScript that means the function doesn't return any value.
+  favoriteNote: (noteId: string) => void;
 }
 
 const NotesList = ({ notes, deleteNote, favoriteNote }: Props) => {
   const [open, setOpen] = useState<boolean>(false);
   const [selected, setSelectedNote] = useState<Note | null>(null);
 
-  const handleOpen = (selected) => {
+  const handleOpen = (selected: {
+    id: string;
+    title: string;
+    text: string;
+    date: string;
+  }) => {
     setOpen(true);
     setSelectedNote(selected);
-    console.log(selected);
   };
   const handleClose = () => setOpen(false);
 

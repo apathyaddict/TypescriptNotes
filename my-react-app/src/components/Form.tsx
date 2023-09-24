@@ -1,25 +1,71 @@
 import { Box, Button, TextField } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
+import fecha from "fecha";
+import SaveIcon from "@mui/icons-material/Save";
+import { nanoid } from "nanoid";
 
 interface FormProps {
-  addNote: () => void;
-  title: string;
-  setTitle: (title: string) => void;
-  inputValue: string;
-  setInputValue: (inputValue: string) => void;
-  noteError: boolean;
+  addNote: (note: Note) => void;
+  selected: {
+    id: string;
+    title: string;
+    text: string;
+    date: string;
+  };
+  setOpen: (open: boolean) => void;
+  handleClose: () => void;
 }
 
-const Form = ({
-  addNote,
-  title,
-  setTitle,
-  inputValue,
-  setInputValue,
-  noteError,
-}: FormProps) => {
+interface Note {
+  id: string;
+  title: string;
+  text: string;
+  date: string;
+}
+
+const Form = ({ addNote, selected, setOpen, handleClose }: FormProps) => {
+  const [inputValue, setInputValue] = useState<string>(
+    selected ? selected.text : ""
+  );
+  const [title, setTitle] = useState<string>(selected ? selected.title : "");
+  const [noteError, setNoteError] = useState<boolean>(false);
+
+  //const [text, setText] = useState(selectedNote ? selectedNote.text : "");
+
+  const now = new Date();
+  const formattedDate = fecha.format(now, "MMM D, hh:mm A");
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    setNoteError(false);
+
+    const noteTitle = title.trim() === "" ? "Untitled" : title;
+
+    if (inputValue == "") {
+      setNoteError(true);
+    }
+
+    const newNote: Note = {
+      id: selected ? selected.id : nanoid(),
+      title: noteTitle,
+      text: inputValue,
+      date: formattedDate,
+    };
+
+    if (!selected) {
+      addNote(newNote);
+      setInputValue("");
+      setTitle("");
+      setNoteError(false);
+    } else {
+      selected.title = title;
+      selected.text = inputValue;
+      handleClose();
+    }
+  }
+
   return (
-    <form onSubmit={addNote}>
+    <form onSubmit={handleSubmit}>
       <Box
         border="primary"
         display="flex"
@@ -59,13 +105,19 @@ const Form = ({
           marginBottom: 4,
         }}
       >
-        <Button
-          variant="contained"
-          startIcon={<span className="material-icons">add</span>}
-          type="submit"
-        >
-          Note
-        </Button>
+        {!selected ? (
+          <Button
+            variant="contained"
+            startIcon={<span className="material-icons">add</span>}
+            type="submit"
+          >
+            Note
+          </Button>
+        ) : (
+          <Button variant="contained" startIcon={<SaveIcon />} type="submit">
+            save
+          </Button>
+        )}
       </Box>
     </form>
   );
