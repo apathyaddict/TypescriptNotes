@@ -82,7 +82,7 @@ const Form = ({ addNote, selected, handleClose }: FormProps) => {
       >
         <TextField
           id="outlined-password-input"
-          label="Note Title"
+          label="Title"
           type="text"
           sx={{ width: "100%" }}
           margin="normal"

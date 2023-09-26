@@ -1,14 +1,11 @@
 import "./App.css";
-import TextField from "@mui/material/TextField";
-import { Container } from "@mui/material";
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
 import { useState } from "react";
 import NotesList from "./components/NotesList";
-import EditModal from "./components/EditModal";
-import Form from "./components/Form";
 import ButtonAppBar from "./components/ButtonAppBar";
+
+import Home from "./Pages/Home";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import FavoriteList from "./components/FavoriteList";
 
 interface Note {
   id: string;
@@ -51,34 +48,26 @@ function App() {
 
   return (
     <>
-      <ButtonAppBar />
-      <Container fixed maxWidth="sm" sx={{ padding: 3 }}>
-        <Typography variant="h3" gutterBottom>
-          Reminders
-        </Typography>
-        <Box>
-          <Form
-            {...{
-              addNote,
-              setOpen,
-              handleClose,
-            }}
+      <BrowserRouter>
+        <ButtonAppBar />
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <Home
+                {...{
+                  addNote,
+                  handleClose,
+                  notes,
+                  deleteNote,
+                  favoriteNote,
+                }}
+              />
+            }
           />
-        </Box>
-      </Container>
-      <Box paddingLeft={15} paddingRight={15}>
-        <NotesList
-          notes={notes}
-          deleteNote={deleteNote}
-          favoriteNote={favoriteNote}
-        />
-        {/* Favorite NotesList
-        <NotesList
-          notes={favNotes}
-          deleteNote={deleteNote}
-          favoriteNote={favoriteNote}
-        /> */}
-      </Box>
+          <Route path="/favorites" element={<FavoriteList />} />
+        </Routes>
+      </BrowserRouter>
     </>
   );
 }

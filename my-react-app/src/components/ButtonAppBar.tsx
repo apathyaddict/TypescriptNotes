@@ -8,6 +8,7 @@ import EditNoteIcon from "@mui/icons-material/EditNote";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import DeleteIcon from "@mui/icons-material/Delete";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
+import { Link, NavLink } from "react-router-dom";
 
 export default function ButtonAppBar() {
   // Function to get the current time in the "16:00" format
@@ -36,12 +37,17 @@ export default function ButtonAppBar() {
       <AppBar position="static">
         <Toolbar sx={{ justifyContent: "space-between" }}>
           <Box sx={{ display: "flex", alignItems: "center" }}>
-            <IconButton aria-label="" color="inherit">
-              <EditNoteIcon />
-            </IconButton>
-            <IconButton aria-label="" color="inherit">
-              <FavoriteIcon />
-            </IconButton>
+            <NavLink to="/" className="link">
+              <IconButton aria-label="" color="inherit">
+                <EditNoteIcon />
+              </IconButton>
+            </NavLink>
+            <NavLink to="/favorites" className="link">
+              <IconButton aria-label="" color="inherit">
+                <FavoriteIcon />
+              </IconButton>
+            </NavLink>
+
             <IconButton aria-label="" color="inherit">
               <DeleteIcon />
             </IconButton>

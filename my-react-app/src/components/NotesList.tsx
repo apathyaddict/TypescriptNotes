@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Grid from "@mui/material/Grid";
 import Note from "./Note";
 import EditModal from "./EditModal";
+import { Box } from "@mui/material";
 
 interface Note {
   id: string;
@@ -33,18 +34,20 @@ const NotesList = ({ notes, deleteNote, favoriteNote }: Props) => {
 
   return (
     <>
-      <Grid container spacing={2}>
-        {notes.map((note) => (
-          <Grid item key={note.id}>
-            <Note
-              note={note}
-              deleteNote={deleteNote}
-              favoriteNote={favoriteNote}
-              {...{ open, handleOpen, handleClose }}
-            />
-          </Grid>
-        ))}
-      </Grid>
+      <Box paddingLeft={15} paddingRight={15}>
+        <Grid container spacing={2}>
+          {notes.map((note) => (
+            <Grid item key={note.id}>
+              <Note
+                note={note}
+                deleteNote={deleteNote}
+                favoriteNote={favoriteNote}
+                {...{ open, handleOpen, handleClose }}
+              />
+            </Grid>
+          ))}
+        </Grid>
+      </Box>
       <EditModal {...{ open, handleOpen, handleClose, selected }} />
     </>
   );
