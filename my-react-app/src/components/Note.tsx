@@ -11,10 +11,9 @@ interface NoteProps {
   note: { id: string; title: string; text: string; date: string };
   deleteNote: (noteId: string) => void;
   favoriteNote: (noteId: string) => void;
-  handleOpen: () => void;
 }
 
-const Note = ({ note, deleteNote, favoriteNote, handleOpen }: NoteProps) => {
+const Note = ({ note, deleteNote, favoriteNote }: NoteProps) => {
   const [isFavorited, setIsFavorited] = useState<boolean>(false);
 
   const handleDelete = () => {

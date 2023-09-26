@@ -65,7 +65,19 @@ function App() {
               />
             }
           />
-          <Route path="/favorites" element={<FavoriteList />} />
+          <Route
+            path="/favorites"
+            element={
+              <FavoriteList
+                {...{
+                  favNotes,
+                  handleClose,
+                  deleteNote,
+                  favoriteNote,
+                }}
+              />
+            }
+          />
         </Routes>
       </BrowserRouter>
     </>
