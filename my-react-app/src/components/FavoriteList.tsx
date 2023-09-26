@@ -8,7 +8,6 @@ interface FavNoteProps {
   favNotes: { id: string; title: string; text: string; date: string }[];
   deletedNotes: { id: string; title: string; text: string; date: string }[];
   handleClose: () => void;
-  notes: { id: string; title: string; text: string; date: string }[];
   deleteNote: (noteId: string) => void; //This part represents the return type of the function. void is a type in TypeScript that means the function doesn't return any value.
   favoriteNote: (noteId: string) => void;
   displayType: "favorites" | "deleted";
@@ -21,7 +20,6 @@ const FavoriteList = ({
   favoriteNote,
   deletedNotes,
   displayType,
-  notes,
 }: FavNoteProps) => {
   const displayedNotes = displayType === "favorites" ? favNotes : deletedNotes;
 
@@ -34,7 +32,7 @@ const FavoriteList = ({
               note={note}
               deleteNote={deleteNote}
               favoriteNote={favoriteNote}
-              {...{ open, handleClose }}
+              {...{ open, handleClose, displayType }}
             />
           </Grid>
         ))}

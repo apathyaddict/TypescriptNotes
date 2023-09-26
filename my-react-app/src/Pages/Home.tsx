@@ -21,6 +21,7 @@ interface FormProps {
   };
   //   setOpen: (open: boolean) => void;
   handleClose: () => void;
+  // handleOpen: () => void;
   notes: { id: string; title: string; text: string; date: string }[];
   deleteNote: (noteId: string) => void; //This part represents the return type of the function. void is a type in TypeScript that means the function doesn't return any value.
   favoriteNote: (noteId: string) => void;
@@ -32,7 +33,8 @@ const Home = ({
   notes,
   deleteNote,
   favoriteNote,
-}: FormProps) => {
+} // handleOpen,
+: FormProps) => {
   return (
     <>
       <Container fixed maxWidth="sm" sx={{ padding: 3 }}>
@@ -53,6 +55,7 @@ const Home = ({
         notes={notes}
         deleteNote={deleteNote}
         favoriteNote={favoriteNote}
+        // handleOpen={handelOpen}
       />
     </>
   );

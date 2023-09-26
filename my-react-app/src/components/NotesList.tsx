@@ -42,7 +42,7 @@ const NotesList = ({ notes, deleteNote, favoriteNote }: Props) => {
                 note={note}
                 deleteNote={deleteNote}
                 favoriteNote={favoriteNote}
-                {...{ open, handleClose }}
+                {...{ open, handleClose, handleOpen }}
               />
             </Grid>
           ))}

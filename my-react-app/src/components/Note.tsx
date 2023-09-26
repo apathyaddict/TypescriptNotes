@@ -11,9 +11,17 @@ interface NoteProps {
   note: { id: string; title: string; text: string; date: string };
   deleteNote: (noteId: string) => void;
   favoriteNote: (noteId: string) => void;
+  handleOpen: () => void;
+  displayType: string;
 }
 
-const Note = ({ note, deleteNote, favoriteNote }: NoteProps) => {
+const Note = ({
+  note,
+  deleteNote,
+  favoriteNote,
+  handleOpen,
+  displayType,
+}: NoteProps) => {
   const [isFavorited, setIsFavorited] = useState<boolean>(false);
 
   const handleDelete = () => {
@@ -24,6 +32,8 @@ const Note = ({ note, deleteNote, favoriteNote }: NoteProps) => {
     favoriteNote(note.id);
     setIsFavorited((prevIsFavorited) => !prevIsFavorited);
   };
+
+  const isEditable = displayType !== "favorites" && displayType !== "deleted";
 
   return (
     <Card
@@ -51,17 +61,19 @@ const Note = ({ note, deleteNote, favoriteNote }: NoteProps) => {
         <Typography variant="body2">{note.text}</Typography>
       </CardContent>
       <div style={{ marginLeft: "auto" }}>
-        <CardActions disableSpacing>
-          <IconButton aria-label="edit" onClick={() => handleOpen(note)}>
-            <EditIcon />
-          </IconButton>
-          <IconButton aria-label="add to favorites" onClick={handleFavorite}>
-            <FavoriteIcon className={isFavorited ? "favorited" : ""} />
-          </IconButton>
-          <IconButton aria-label="delete" onClick={handleDelete}>
-            <DeleteIcon />
-          </IconButton>
-        </CardActions>
+        {isEditable && ( // Render all icons when editable
+          <CardActions disableSpacing>
+            <IconButton aria-label="edit" onClick={() => handleOpen(note)}>
+              <EditIcon />
+            </IconButton>
+            <IconButton aria-label="add to favorites" onClick={handleFavorite}>
+              <FavoriteIcon className={isFavorited ? "favorited" : ""} />
+            </IconButton>
+            <IconButton aria-label="delete" onClick={handleDelete}>
+              <DeleteIcon />
+            </IconButton>
+          </CardActions>
+        )}
       </div>
     </Card>
   );
