@@ -32,14 +32,13 @@ const Home = ({
   handleClose,
   notes,
   deleteNote,
-  favoriteNote,
-} // handleOpen,
-: FormProps) => {
+  favoriteNote, // handleOpen,
+}: FormProps) => {
   return (
     <>
       <Container fixed maxWidth="sm" sx={{ padding: 3 }}>
         <Typography variant="h3" gutterBottom>
-          Reminders
+          Things to Remember...
         </Typography>
         <Box>
           <Form

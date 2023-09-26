@@ -35,9 +35,9 @@ const NotesList = ({ notes, deleteNote, favoriteNote }: Props) => {
   return (
     <>
       <Box paddingLeft={15} paddingRight={15}>
-        <Grid container spacing={2}>
+        <Grid container spacing={4}>
           {notes.map((note) => (
-            <Grid item key={note.id}>
+            <Grid item xs={12} sm={6} md={4} lg={3} key={note.id}>
               <Note
                 note={note}
                 deleteNote={deleteNote}
