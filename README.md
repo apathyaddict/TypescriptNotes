@@ -1,27 +1,33 @@
-# React + TypeScript + Vite
+# Simple Notes App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Welcome to the Simple Notes App! This app allows you to create, edit, save your favorite notes, and delete them. It's a great tool for keeping track of important information or jotting down your thoughts quickly.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Create Notes**: Easily create new notes by clicking the "New Note" button.
 
-## Expanding the ESLint configuration
+- **Edit Notes**: Click on any existing note to edit its content. You can make changes and save them with ease.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- **Save Favorites**: Mark your most important notes as favorites to access them quickly.
 
-- Configure the top-level `parserOptions` property like this:
+- **Delete Notes**: Remove notes you no longer need by clicking the delete button.
 
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
+- **Individual Note Pages**: Each note gets its own dedicated page, making it easy to focus on your content.
+
+## Technologies Used
+
+This app was built using the following technologies:
+
+- **TypeScript**: TypeScript was used to add static typing and enhanced tooling to the project, making the codebase more robust.
+
+- **Material UI**: Material UI was used for the app's design, providing a modern and sleek user interface.
+
+## Usage
+
+To run this app locally:
+
+1. Clone this repository to your local machine.
+
+```bash
+git clone https://github.com/your-username/notes-app.git
 ```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
