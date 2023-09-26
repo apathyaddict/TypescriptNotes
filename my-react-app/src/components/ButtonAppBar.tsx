@@ -47,10 +47,11 @@ export default function ButtonAppBar() {
                 <FavoriteIcon />
               </IconButton>
             </NavLink>
-
-            <IconButton aria-label="" color="inherit">
-              <DeleteIcon />
-            </IconButton>
+            <NavLink to="/deleted" className="link">
+              <IconButton aria-label="" color="inherit">
+                <DeleteIcon />
+              </IconButton>
+            </NavLink>
           </Box>
           <Typography variant="h6" component="div">
             Hi, Stranger

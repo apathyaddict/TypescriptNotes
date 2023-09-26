@@ -17,6 +17,7 @@ interface Note {
 function App() {
   const [notes, setNotes] = useState<Note[]>([]);
   const [favNotes, setFavNotes] = useState<Note[]>([]);
+  const [deletedNotes, setDeletedNotes] = useState<Note[]>([]);
 
   const [open, setOpen] = useState<boolean>(false);
 
@@ -33,6 +34,10 @@ function App() {
   };
 
   const deleteNote = (noteId: string) => {
+    const deletedNote = notes.find((note) => note.id === noteId);
+    if (deletedNote) {
+      setDeletedNotes([...deletedNotes, deletedNote]);
+    }
     const updatedNotes = notes.filter((note) => note.id !== noteId);
     setNotes(updatedNotes);
   };
@@ -74,6 +79,23 @@ function App() {
                   handleClose,
                   deleteNote,
                   favoriteNote,
+                  displayType: "favorites",
+                }}
+              />
+            }
+          />
+
+          <Route
+            path="/deleted"
+            element={
+              <FavoriteList
+                {...{
+                  favNotes,
+                  handleClose,
+                  deleteNote,
+                  favoriteNote,
+                  deletedNotes,
+                  displayType: "deleted",
                 }}
               />
             }
