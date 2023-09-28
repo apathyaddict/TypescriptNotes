@@ -1,8 +1,26 @@
 {
+    "version": 2,
+    "builds": [
+        {
+            "src": "*.js",
+            "use": "@vercel/node"
+        }
+    ],
+    "headers": [
+        {
+            "source": "/(.*)",
+            "headers": [
+                {
+                    "key": "access-control-allow-origin",
+                    "value": "*"
+                }
+            ]
+        }
+    ],
     "rewrites": [
         {
             "source": "/(.*)",
-            "destination": "/index.html"
+            "destination": "/"
         }
     ]
 }
