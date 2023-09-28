@@ -1,7 +1,6 @@
-import React, { useState } from "react";
 import Grid from "@mui/material/Grid";
 import Note from "./Note";
-import EditModal from "./EditModal";
+
 import { Box } from "@mui/material";
 
 interface FavNoteProps {
@@ -29,6 +28,7 @@ const FavoriteList = ({
         {displayedNotes.map((note) => (
           <Grid item key={note.id}>
             <Note
+              handleOpen={() => {}}
               note={note}
               deleteNote={deleteNote}
               favoriteNote={favoriteNote}

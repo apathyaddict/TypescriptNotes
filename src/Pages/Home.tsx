@@ -1,4 +1,3 @@
-import React from "react";
 import { Container, Box } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import Form from "../components/Form";
@@ -13,12 +12,6 @@ interface Note {
 
 interface FormProps {
   addNote: (note: Note) => void;
-  selected: {
-    id: string;
-    title: string;
-    text: string;
-    date: string;
-  };
   //   setOpen: (open: boolean) => void;
   handleClose: () => void;
   // handleOpen: () => void;
@@ -41,12 +34,7 @@ const Home = ({
           Things to Remember...
         </Typography>
         <Box>
-          <Form
-            {...{
-              addNote,
-              handleClose,
-            }}
-          />
+          <Form addNote={addNote} handleClose={handleClose} />
         </Box>
       </Container>
 
@@ -54,7 +42,6 @@ const Home = ({
         notes={notes}
         deleteNote={deleteNote}
         favoriteNote={favoriteNote}
-        // handleOpen={handelOpen}
       />
     </>
   );

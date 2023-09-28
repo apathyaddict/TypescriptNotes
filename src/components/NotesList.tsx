@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Grid from "@mui/material/Grid";
 import Note from "./Note";
 import EditModal from "./EditModal";
@@ -39,6 +39,7 @@ const NotesList = ({ notes, deleteNote, favoriteNote }: Props) => {
           {notes.map((note) => (
             <Grid item xs={12} sm={6} md={4} lg={3} key={note.id}>
               <Note
+                displayType={undefined}
                 note={note}
                 deleteNote={deleteNote}
                 favoriteNote={favoriteNote}
@@ -48,7 +49,9 @@ const NotesList = ({ notes, deleteNote, favoriteNote }: Props) => {
           ))}
         </Grid>
       </Box>
-      <EditModal {...{ open, handleOpen, handleClose, selected }} />
+      {selected && (
+        <EditModal {...{ open, handleOpen, handleClose, selected }} />
+      )}
     </>
   );
 };

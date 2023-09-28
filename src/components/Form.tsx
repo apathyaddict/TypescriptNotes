@@ -4,23 +4,22 @@ import fecha from "fecha";
 import SaveIcon from "@mui/icons-material/Save";
 import { nanoid } from "nanoid";
 
-interface FormProps {
-  addNote: (note: Note) => void;
-  selected: {
-    id: string;
-    title: string;
-    text: string;
-    date: string;
-  };
-  //   setOpen: (open: boolean) => void;
-  handleClose: () => void;
-}
-
 interface Note {
   id: string;
   title: string;
   text: string;
   date: string;
+}
+
+interface FormProps {
+  addNote: (note: Note) => void;
+  selected?: {
+    id: string;
+    title: string;
+    text: string;
+    date: string;
+  };
+  handleClose: () => void;
 }
 
 const Form = ({ addNote, selected, handleClose }: FormProps) => {
@@ -30,12 +29,10 @@ const Form = ({ addNote, selected, handleClose }: FormProps) => {
   const [title, setTitle] = useState<string>(selected ? selected.title : "");
   const [noteError, setNoteError] = useState<boolean>(false);
 
-  //const [text, setText] = useState(selectedNote ? selectedNote.text : "");
-
   const now = new Date();
   const formattedDate = fecha.format(now, "MMM D, hh:mm A");
 
-  function handleSubmit(e) {
+  function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setNoteError(false);
 

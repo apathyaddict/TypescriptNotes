@@ -1,4 +1,3 @@
-import React from "react";
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
 import Form from "./Form";
@@ -30,7 +29,11 @@ const EditModal = ({ open, selected, handleClose }: Props) => {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <Form {...{ selected, handleClose }} />
+          <Form
+            addNote={() => {}} //dummy function
+            selected={selected}
+            handleClose={handleClose}
+          />
         </Box>
       </Modal>
     </div>

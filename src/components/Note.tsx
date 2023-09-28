@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Card from "@mui/material/Card";
 import Typography from "@mui/material/Typography";
 import CardContent from "@mui/material/CardContent";
@@ -11,8 +11,13 @@ interface NoteProps {
   note: { id: string; title: string; text: string; date: string };
   deleteNote: (noteId: string) => void;
   favoriteNote: (noteId: string) => void;
-  handleOpen: () => void;
-  displayType: string;
+  handleOpen: (note: {
+    id: string;
+    title: string;
+    text: string;
+    date: string;
+  }) => void;
+  displayType?: string;
 }
 
 const Note = ({

@@ -1,6 +1,5 @@
 import "./App.css";
 import { useState } from "react";
-import NotesList from "./components/NotesList";
 import ButtonAppBar from "./components/ButtonAppBar";
 
 import Home from "./Pages/Home";
@@ -50,6 +49,10 @@ function App() {
     }
   };
 
+  if (open) {
+    console.log("The 'open' variable is true.");
+  }
+
   return (
     <>
       <BrowserRouter>
@@ -78,6 +81,7 @@ function App() {
                   handleClose,
                   deleteNote,
                   favoriteNote,
+                  deletedNotes,
                   displayType: "favorites",
                 }}
               />
