@@ -3,12 +3,21 @@ import React, { useState } from "react";
 import fecha from "fecha";
 import SaveIcon from "@mui/icons-material/Save";
 import { nanoid } from "nanoid";
-import { Note } from "../shared/Interface";
+
+interface Note {
+  id: string;
+  title: string;
+  text: string;
+  date: string;
+}
 
 interface FormProps {
   addNote: (note: Note) => void;
   selected?: {
-    note: Note;
+    id: string;
+    title: string;
+    text: string;
+    date: string;
   };
   handleClose: () => void;
 }
