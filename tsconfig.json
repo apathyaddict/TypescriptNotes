@@ -5,14 +5,14 @@
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
     "module": "ESNext",
     "skipLibCheck": true,
+    "outDir": "./build",
 
     /* Bundler mode */
     "moduleResolution": "bundler",
     "allowImportingTsExtensions": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "noEmit": false,  // Set this to false to generate output files
-    "outDir": "./build",  // Specify the output directory for compiled files
+    "noEmit": true,
     "jsx": "react-jsx",
 
     /* Linting */
