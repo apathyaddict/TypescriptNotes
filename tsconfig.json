@@ -11,7 +11,8 @@
     "allowImportingTsExtensions": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "noEmit": true,
+    "noEmit": false,  // Set this to false to generate output files
+    "outDir": "./build",  // Specify the output directory for compiled files
     "jsx": "react-jsx",
 
     /* Linting */
